@@ -344,7 +344,7 @@ function handlePokemonClick(id) {
       // Get the color information for the clicked Pokémon ID
       const colors = pokemonColors[id].map(color => color.replace('#', ''));
 
-      const apiUrl = `https://bennettolsen.us:5000/set_colors?password=candycane72&color1=${colors[0]}&color2=${colors[1]}&color3=${colors[2]}`;
+      const apiUrl = `https://bennettolsen.us:5000/set_colors?password=${localStorage.getItem('password')}&color1=${colors[0]}&color2=${colors[1]}&color3=${colors[2]}`;
       console.log(apiUrl);
       fetch(apiUrl)
         .then(apiResponse => {
