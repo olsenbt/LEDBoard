@@ -339,7 +339,7 @@ function handlePokemonClick(id) {
 
   // Find the Pokémon name
   const pokemonNameElement = document.getElementById(id).querySelector('.card_text');
-  const pokemonName = pokemonNameElement.textContent;
+  const pokemonName = pokemonNameElement.textContent.toLowerCase();
 
   // Call the backend script with the Pokémon name as an argument
   const apiUrl = `https://bennettolsen.us:5000/pokemon?password=${localStorage.getItem('password')}&pokemon=${pokemonName}`;
