@@ -1,8 +1,8 @@
 {
-    "name": "Xmas Light Controller",
+    "name": "Board Light Controller",
     "short_name": "LightController",
     "description": "A simple led light controller",
-    "start_url": "/XmasLights",
+    "start_url": "/LEDBoard",
     "display": "standalone",
     "background_color": "#ffffff",
     "theme_color": "#000000",
