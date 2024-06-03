@@ -337,35 +337,28 @@ function handlePokemonClick(id) {
   // Remove the highlight from the previously selected Pokémon button
   highlightSelectedPokemon(null);
 
-  // Read the color information from the pokemonColors.json file
-  fetch('pokemonColors.json')
-    .then(response => response.json())
-    .then(pokemonColors => {
-      // Get the color information for the clicked Pokémon ID
-      const colors = pokemonColors[id].map(color => color.replace('#', ''));
+  // Find the Pokémon name
+  const pokemonNameElement = document.getElementById(id).querySelector('.card_text');
+  const pokemonName = pokemonNameElement.textContent;
 
-      const apiUrl = `https://bennettolsen.us:5000/set_colors?password=${localStorage.getItem('password')}&color1=${colors[0]}&color2=${colors[1]}&color3=${colors[2]}`;
-      console.log(apiUrl);
-      fetch(apiUrl)
-        .then(apiResponse => {
-          if (!apiResponse.ok) {
-            throw new Error(`API request failed with status: ${apiResponse.status}`);
-          }
-          return apiResponse.text();
-        })
-        .then(responseText => {
-          console.log(responseText); // Log the response from the server
-        })
-        .catch(error => {
-          console.error('Error making API request:', error);
-        });
-
-      // Highlight the clicked Pokémon button
-      highlightSelectedPokemon(id);
+  // Call the backend script with the Pokémon name as an argument
+  const apiUrl = `https://bennettolsen.us:5000/pokemon?password=${localStorage.getItem('password')}&pokemon=${pokemonName}`;
+  fetch(apiUrl)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`API request failed with status: ${response.status}`);
+      }
+      return response.text();
+    })
+    .then(responseText => {
+      console.log(responseText); // Log the response from the server
     })
     .catch(error => {
-      console.error('Error reading pokemonColors.json:', error);
+      console.error('Error making API request:', error);
     });
+
+  // Highlight the clicked Pokémon button
+  highlightSelectedPokemon(id);
 }
 
 function chooseRandomPokemon() {
