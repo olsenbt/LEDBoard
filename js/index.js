@@ -224,6 +224,27 @@ function runScript(scriptName) {
     });
 }
 
+function runAnimation(animationName) {
+  // Update the apiUrl with the new API endpoint and IP address
+  let apiUrl = `https://bennettolsen.us:5000/run_animation?password=${localStorage.getItem('password')}&animation=${animationName}`;
+
+  // Send a GET request to the updated API endpoint
+  fetch(apiUrl)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status}`);
+      }
+      return response.text();
+    })
+    .then(result => {
+      console.log(result);
+    })
+    .catch(error => {
+      console.error(error);
+      alert(`Error executing ${scriptName} script: ${error.message}`);
+    });
+}
+
 function showLoginPage() {
   // Show the login page and hide other content
   document.getElementById('navbar').style.display = 'none';
